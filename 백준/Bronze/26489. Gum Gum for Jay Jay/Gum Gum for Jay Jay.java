@@ -1,19 +1,16 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Scanner sc = new Scanner(System.in);
-        List<String> input = new ArrayList<String>();
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-            if (line.isEmpty()) {
-                break;
-            }
-            input.add(line);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = 0;
+
+        while (br.readLine() != null) {
+            count++;
         }
-        System.out.println(input.toArray().length);
-        sc.close();
+
+        System.out.println(count);
+        br.close();
     }
 }
