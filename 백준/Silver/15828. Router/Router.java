@@ -1,21 +1,39 @@
 import java.util.*;
+import java.io.*;
 
 class Main
 {
 
-    public static void main (String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main (String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int N = sc.nextInt();
+        int N = Integer.parseInt(br.readLine());
         Queue<Integer> que = new LinkedList<>();
+
         while (true) {
-            int input = sc.nextInt();
+            int input = Integer.parseInt(br.readLine());
             if(input == -1) break;
-            else if (input == 0) que.poll();
-            else que.add(input);
+            else if (input == 0) {
+                que.poll();
+            }
+            else {
+                if(que.size() < N) {
+                    que.add(input);
+                }
+            }
         }
-        for (int i : que) {
-            System.out.print(i + " ");
+
+        if(que.isEmpty()) {
+            bw.write("empty");
+        } else {
+            for (int i : que) {
+                bw.write(i + " ");
+            }
         }
+
+        bw.flush();
+        br.close();
+        bw.close();
     }
 }
