@@ -1,6 +1,4 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 class Main
 {
@@ -12,9 +10,12 @@ class Main
             int M = sc.nextInt();
 
             Queue<int[]> queue = new LinkedList<>();
+            PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Collections.reverseOrder());
+
             for (int i = 0; i < N; i++) {
                 int priority = sc.nextInt();
                 queue.add(new int[]{priority, i});
+                priorityQueue.add(priority);
             }
 
             int count = 0;
@@ -23,21 +24,14 @@ class Main
                 int currentPriority = current[0];
                 int currentIndex = current[1];
 
-                boolean hasHigherPriority = false;
-                for (int[] doc : queue) {
-                    if (doc[0] > currentPriority) {
-                        hasHigherPriority = true;
-                        break;
-                    }
-                }
-
-                if (hasHigherPriority) {
-                    queue.add(current);
-                } else {
+                if (currentPriority == priorityQueue.peek()) {
+                    priorityQueue.poll();
                     count++;
                     if (currentIndex == M) {
                         break;
                     }
+                } else {
+                    queue.add(current);
                 }
             }
 
